@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.jeecg.modules.demo.test.mapper.TWareCertificateChkMapper">
+
+
+    <select id="getYwOrderQuery" resultType="org.jeecg.modules.demo.test.entity.YwQueryEntity">
+    SELECT
+        t_batsale_d.batsaleno AS batsaleno,
+        t_batsale_d.rowno AS rowno,
+        vm.warecode AS warecode,
+        t_batsale_d.wareid AS wareid,
+        vm.warename AS warename,
+        t_batsale_d.makeno AS makeno,
+        vm.waregeneralname AS waregeneralname ,
+        vm.warespec AS warespec,
+        tf.factoryname AS factoryname,
+        twa.fileno AS fileno,
+        vm.wareunit AS wareunit
+    FROM
+        t_batsale_d t_batsale_d
+        JOIN t_batsale_h th ON th.batsaleno = t_batsale_d.batsaleno
+        LEFT JOIN t_ware vm ON t_batsale_d.wareid = vm.wareid
+        AND th.compid = vm.compid
+        LEFT JOIN t_ware_base twa ON t_batsale_d.wareid = twa.wareid
+        LEFT JOIN t_ware_ext twe ON t_batsale_d.wareid = twe.wareid
+        AND th.compid = twe.compid
+        LEFT JOIN t_area ta ON t_batsale_d.areacode = ta.areacode
+        LEFT JOIN t_factory tf ON t_batsale_d.factoryid = tf.factoryid
+        LEFT JOIN t_stall ts ON ts.compid = th.compid
+        AND t_batsale_d.stallno = ts.stallno
+        AND ts.busno = th.busno
+        LEFT JOIN (
+    SELECT
+        decode( count( 1 ), 0, 0, NULL, 0, 1 ) AS img_len,
+        wareid,
+        makeno
+    FROM
+        t_ware_certificate_image
+    WHERE
+        img IS NOT NULL
+    GROUP BY
+        wareid,
+        makeno
+        ) t ON t.wareid = t_batsale_d.wareid
+        AND t.makeno = t_batsale_d.makeno
+        LEFT JOIN t_store_i i ON th.compid = i.compid
+        AND t_batsale_d.wareid = i.wareid
+        AND t_batsale_d.batid = i.batid
+    WHERE
+        t_batsale_d.batsaleno = #{batsaleno}
+    </select>
+
+
+</mapper>

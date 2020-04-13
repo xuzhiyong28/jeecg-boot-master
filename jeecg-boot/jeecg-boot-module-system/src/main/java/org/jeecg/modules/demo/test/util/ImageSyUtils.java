@@ -26,8 +26,6 @@ public class ImageSyUtils {
         ByteArrayOutputStream bout = null;
         try {
             ClassPathResource classPathResource = new ClassPathResource("sy.png");
-            System.out.println(classPathResource.getFile());
-            System.out.println(classPathResource.getFile().getParent());
             bout = new ByteArrayOutputStream();
             in = new ByteArrayInputStream(imgByte);
             BufferedImage image = ImageIO.read(in);

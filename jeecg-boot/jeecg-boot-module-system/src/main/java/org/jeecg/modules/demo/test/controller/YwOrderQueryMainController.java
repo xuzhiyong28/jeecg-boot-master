@@ -59,7 +59,7 @@ public class YwOrderQueryMainController extends JeecgController<TWareCertificate
             resultMap.put("total", "0");
             return Result.ok(resultMap);
         }
-        List<YwQueryEntity> ywOrderQuery = itWareCertificateChkService.getYwOrderQuery("2004050003");
+        List<YwQueryEntity> ywOrderQuery = itWareCertificateChkService.getYwOrderQuery(ywQueryEntity.getBatsaleno());
         Map<String, Object> resultMap = Maps.newHashMap();
         resultMap.put("records", ywOrderQuery);
         resultMap.put("total", ywOrderQuery.size());
@@ -70,7 +70,8 @@ public class YwOrderQueryMainController extends JeecgController<TWareCertificate
     @GetMapping(value = "/imgList")
     public Result<?> getIWareModel(@RequestParam(name = "wareid") String wareid) {
         QueryWrapper<TWareCertificateChk> tWareCertificateChkQueryWrapper = new QueryWrapper();
-        tWareCertificateChkQueryWrapper.eq("wareid", 44954);
+        //tWareCertificateChkQueryWrapper.eq("wareid", 44954);
+
         List<TWareCertificateChk> tWareCertificateChks = itWareCertificateChkService.list(tWareCertificateChkQueryWrapper);
 
         if (CollectionUtils.isNotEmpty(tWareCertificateChks)) {

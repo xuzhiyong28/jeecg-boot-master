@@ -22,6 +22,7 @@
           <a-card :title="tempIndex.title" :bordered="false">
             <!--http://img0.imgtn.bdimg.com/it/u=1138935709,3573339285&fm=26&gp=0.jpg-->
             <p><img style="width: 300px;height: 200px" :src="tempIndex.img"></p>
+            <!--<p><ZyUpload v-model="tempIndex.img"  :trigger-change="true" :uploadType="false"></ZyUpload></p>-->
           </a-card>
         </a-col>
       </a-row>
@@ -47,7 +48,8 @@
     components: {
       JDate,
       JSZip,
-      FileSaver
+      FileSaver,
+      ZyUpload
     },
     data() {
       return {

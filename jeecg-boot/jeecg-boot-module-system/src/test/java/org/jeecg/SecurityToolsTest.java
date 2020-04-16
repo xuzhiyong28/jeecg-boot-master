@@ -1,9 +1,13 @@
 package org.jeecg;
 
 import cn.hutool.json.JSONObject;
+import org.apache.poi.ss.util.ImageUtils;
 import org.jeecg.common.util.security.SecurityTools;
 import org.jeecg.common.util.security.entity.*;
+import org.jeecg.modules.demo.test.util.ImageSyUtils;
 import org.junit.Test;
+
+import java.io.*;
 
 public class SecurityToolsTest {
     @Test
@@ -46,4 +50,28 @@ public class SecurityToolsTest {
         //sucess 为验签成功失败标志 true代码验签成功，false代表失败
         System.out.println(new JSONObject(securityResp).toStringPretty());
     }
+
+    @Test
+    public void testImg() throws IOException {
+        FileInputStream fis = new FileInputStream("D:\\fp.jpg");
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        byte[] b = new byte[1024];
+        int n;
+        while ((n = fis.read(b)) != -1)
+        {
+            bos.write(b, 0, n);
+        }
+        fis.close();
+        bos.close();
+        byte[] buffer = bos.toByteArray();
+        byte[] newBuffer = ImageSyUtils.imgAddSy(buffer);
+        BufferedOutputStream bos2 = null;
+        FileOutputStream fos = null;
+        File file = new File("D:\\fp2.jpg");
+        fos = new FileOutputStream(file);
+        bos2 = new BufferedOutputStream(fos);
+        bos2.write(newBuffer);
+    }
+
 }
+

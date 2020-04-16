@@ -426,6 +426,7 @@
 					<include>**/*.xml</include>
 					<include>**/*.json</include>
 					<include>**/*.ftl</include>
+					<include>**/*.png</include>
 				</includes>
 			</resource>
 		</resources>

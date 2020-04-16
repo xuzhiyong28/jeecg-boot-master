@@ -110,14 +110,14 @@
             dataIndex: 'warename'
           },*/
           {
-            title: '批号',
-            align:"center",
-            dataIndex: 'makeno'
-          },
-          {
             title: '商品名称',
             align:"center",
             dataIndex: 'waregeneralname'
+          },
+          {
+            title: '批号',
+            align:"center",
+            dataIndex: 'makeno'
           },
           {
             title: '商品规格',
@@ -168,14 +168,19 @@
     methods: {
       showPhoto(record){
         let _this = this;
+        this.$message.loading({ content: '数据查询中,请稍后......'});
         getAction('/test/ywOrderQueryMain/imgList',{"wareid" : record.wareid}).then(res=>{
           if(res.success){
             _this.$refs.showImgModel.edit(record,res.result);
             _this.$refs.showImgModel.title = "图片查看";
             _this.$refs.showImgModel.disableSubmit = true;
+            this.$message.loading({ content: '查询成功'});
+          }else{
+            this.$message.error('查询失败');
           }
-
-        })
+        }).error(e => {
+          this.$message.error('查询失败');
+        });
 
 
         /*this.$refs.showImgModel.edit(record);

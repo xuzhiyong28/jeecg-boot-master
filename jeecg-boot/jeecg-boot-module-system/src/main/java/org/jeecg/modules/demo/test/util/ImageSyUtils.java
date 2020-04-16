@@ -19,18 +19,19 @@ import java.io.IOException;
 public class ImageSyUtils {
 
     // 不透明度
-    private static float opacity = 0.25f;
+    private static float opacity = 0.8f;
 
     public static byte[] imgAddSy(byte[] imgByte) {
         ByteArrayInputStream in = null;
         ByteArrayOutputStream bout = null;
         try {
-            ClassPathResource classPathResource = new ClassPathResource("sy.png");
+            ClassPathResource classPathResource = new ClassPathResource("sy.jpg");
             bout = new ByteArrayOutputStream();
             in = new ByteArrayInputStream(imgByte);
             BufferedImage image = ImageIO.read(in);
+            BufferedImage syBufferImage = ImageIO.read(classPathResource.getFile());
             Thumbnails.of(image).size(image.getWidth(), image.getHeight())
-                    .watermark(Positions.BOTTOM_RIGHT, ImageIO.read(classPathResource.getFile()), opacity).outputFormat("png").toOutputStream(bout);
+                    .watermark(Positions.BOTTOM_RIGHT, syBufferImage , opacity).outputFormat("png").toOutputStream(bout);
             byte[] bytes = bout.toByteArray();
             return bytes;
         } catch (IOException e) {

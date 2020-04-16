@@ -25,11 +25,12 @@ public class ImageSyUtils {
         ByteArrayInputStream in = null;
         ByteArrayOutputStream bout = null;
         try {
-            ClassPathResource classPathResource = new ClassPathResource("sy.jpg");
             bout = new ByteArrayOutputStream();
             in = new ByteArrayInputStream(imgByte);
             BufferedImage image = ImageIO.read(in);
-            BufferedImage syBufferImage = ImageIO.read(classPathResource.getFile());
+            String path = ImageSyUtils.class.getClassLoader().getResource("sy.png").getPath();
+            File syFile = new File(path);
+            BufferedImage syBufferImage = ImageIO.read(syFile);
             Thumbnails.of(image).size(image.getWidth(), image.getHeight())
                     .watermark(Positions.BOTTOM_RIGHT, syBufferImage , opacity).outputFormat("png").toOutputStream(bout);
             byte[] bytes = bout.toByteArray();

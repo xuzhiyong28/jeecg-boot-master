@@ -73,5 +73,11 @@ public class SecurityToolsTest {
         bos2.write(newBuffer);
     }
 
+    @Test
+    public void testFile(){
+        System.out.println(ImageSyUtils.class.getClassLoader().getResource("sy.jpg").getPath());
+    }
+
+
 }
 

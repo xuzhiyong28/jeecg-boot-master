@@ -3,10 +3,12 @@ package org.jeecg;
 import org.jeecg.common.util.SpringContextUtils;
 import org.jeecg.modules.demo.mock.MockController;
 import org.jeecg.modules.demo.test.entity.JeecgDemo;
+import org.jeecg.modules.demo.test.entity.TWareCertificateImage;
 import org.jeecg.modules.demo.test.entity.YwQueryEntity;
 import org.jeecg.modules.demo.test.mapper.JeecgDemoMapper;
 import org.jeecg.modules.demo.test.service.IJeecgDemoService;
 import org.jeecg.modules.demo.test.service.ITWareCertificateChkService;
+import org.jeecg.modules.demo.test.service.TWareCertificateImageService;
 import org.jeecg.modules.system.service.ISysDataLogService;
 import org.junit.Assert;
 import org.junit.Test;
@@ -33,6 +35,10 @@ public class SampleTest {
 
 	@Resource
 	private ITWareCertificateChkService itWareCertificateChkService;
+
+
+	@Resource
+	private TWareCertificateImageService tWareCertificateImageService;
 
 
 	@Test
@@ -83,6 +89,12 @@ public class SampleTest {
 		System.out.println(itWareCertificateChkService);
 		List<YwQueryEntity> ywOrderQuery = itWareCertificateChkService.getYwOrderQuery("2004050003");
 		System.out.println(ywOrderQuery);
+	}
+
+	@Test
+	public void img(){
+		List<TWareCertificateImage> list = tWareCertificateImageService.list();
+		System.out.println(list);
 
 	}
 

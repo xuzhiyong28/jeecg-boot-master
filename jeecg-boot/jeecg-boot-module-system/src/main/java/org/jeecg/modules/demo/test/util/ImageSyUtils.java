@@ -30,7 +30,9 @@ public class ImageSyUtils {
             resourceAsStream = ImageSyUtils.class.getClassLoader().getResourceAsStream("sy.png");
             BufferedImage syBufferImage = ImageIO.read(resourceAsStream);
             Thumbnails.of(image).size(image.getWidth(), image.getHeight())
-                    .watermark(Positions.BOTTOM_RIGHT, syBufferImage , opacity).outputFormat("png").toOutputStream(bout);
+                    .watermark(Positions.BOTTOM_RIGHT, syBufferImage , opacity)
+                    .outputFormat("png")
+                    .toOutputStream(bout);
             byte[] bytes = bout.toByteArray();
             return bytes;
         } catch (IOException e) {

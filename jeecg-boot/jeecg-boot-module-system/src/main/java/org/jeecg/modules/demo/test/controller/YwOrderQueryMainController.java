@@ -9,12 +9,15 @@ import com.google.common.collect.Maps;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
+import org.checkerframework.checker.units.qual.A;
 import org.jeecg.common.api.vo.Result;
 import org.jeecg.common.system.base.controller.JeecgController;
 import org.jeecg.modules.demo.test.entity.TWareCertificateChk;
+import org.jeecg.modules.demo.test.entity.TWareCertificateImage;
 import org.jeecg.modules.demo.test.entity.YwQueryEntity;
 import org.jeecg.modules.demo.test.mapper.TWareCertificateChkMapper;
 import org.jeecg.modules.demo.test.service.ITWareCertificateChkService;
+import org.jeecg.modules.demo.test.service.TWareCertificateImageService;
 import org.jeecg.modules.demo.test.util.ImageSyUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,7 +27,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import java.util.Base64;
 import java.util.List;
 import java.util.Map;
 
@@ -39,6 +41,9 @@ public class YwOrderQueryMainController extends JeecgController<TWareCertificate
 
     @Autowired
     private ITWareCertificateChkService itWareCertificateChkService;
+
+    @Autowired
+    private TWareCertificateImageService tWareCertificateImageService;
 
     @Resource
     private TWareCertificateChkMapper tWareCertificateChkMapper;
@@ -70,9 +75,12 @@ public class YwOrderQueryMainController extends JeecgController<TWareCertificate
     @GetMapping(value = "/imgList")
     public Result<?> getIWareModel(@RequestParam(name = "wareid") String wareid) {
         QueryWrapper<TWareCertificateChk> tWareCertificateChkQueryWrapper = new QueryWrapper();
-        tWareCertificateChkQueryWrapper.eq("wareid", wareid);
+        //tWareCertificateChkQueryWrapper.eq("wareid", wareid);
+        //List<TWareCertificateChk> tWareCertificateChks = itWareCertificateChkService.list(tWareCertificateChkQueryWrapper);
 
-        List<TWareCertificateChk> tWareCertificateChks = itWareCertificateChkService.list(tWareCertificateChkQueryWrapper);
+        QueryWrapper<TWareCertificateImage> tWareCertificateImageQueryWrapper = new QueryWrapper<>();
+        tWareCertificateImageQueryWrapper.eq("WAREID",wareid);
+        List<TWareCertificateImage> tWareCertificateChks = tWareCertificateImageService.list(tWareCertificateImageQueryWrapper);
 
         if (CollectionUtils.isNotEmpty(tWareCertificateChks)) {
             tWareCertificateChks.forEach(ware -> {

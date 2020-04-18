@@ -101,7 +101,7 @@ spring:
           password: xuht@123
           driver-class-name: com.mysql.jdbc.Driver
           # 多数据源配置
-        multi-datasource1:
+        hydee:
           url: jdbc:oracle:thin:@//192.168.1.125:1521/hydee
           username: h2
           password: hydeesoft

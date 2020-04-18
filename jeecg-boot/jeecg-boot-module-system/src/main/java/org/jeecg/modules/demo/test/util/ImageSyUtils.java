@@ -3,9 +3,11 @@ package org.jeecg.modules.demo.test.util;
 import cn.hutool.core.io.resource.ClassPathResource;
 import lombok.extern.slf4j.Slf4j;
 import net.coobird.thumbnailator.Thumbnails;
+import net.coobird.thumbnailator.geometry.Position;
 import net.coobird.thumbnailator.geometry.Positions;
 
 import javax.imageio.ImageIO;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.*;
 
@@ -17,7 +19,7 @@ import java.io.*;
 public class ImageSyUtils {
 
     // 不透明度
-    private static float opacity = 0.8f;
+    private static float opacity = 0.6f;
 
     public static byte[] imgAddSy(byte[] imgByte) {
         ByteArrayInputStream in = null;
@@ -29,8 +31,17 @@ public class ImageSyUtils {
             BufferedImage image = ImageIO.read(in);
             resourceAsStream = ImageSyUtils.class.getClassLoader().getResourceAsStream("sy.png");
             BufferedImage syBufferImage = ImageIO.read(resourceAsStream);
-            Thumbnails.of(image).size(image.getWidth(), image.getHeight())
-                    .watermark(Positions.BOTTOM_RIGHT, syBufferImage , opacity)
+            Thumbnails.of(image)
+                    //.size(image.getWidth(), image.getHeight())
+                    .scale(0.5f)
+                    //.watermark(Positions.BOTTOM_RIGHT, syBufferImage , opacity)
+                    .watermark((var1, var2, var3, var4, var5, var6, var7, var8) -> {
+                        int var9 = var1 - var3 - var6 - 150;
+                        int var10 = var2 - var4 - var8 - 150;
+                        System.out.println(var9);
+                        System.out.println(var10);
+                        return new Point(var9, var10);
+                    },syBufferImage , opacity)
                     .outputFormat("png")
                     .toOutputStream(bout);
             byte[] bytes = bout.toByteArray();

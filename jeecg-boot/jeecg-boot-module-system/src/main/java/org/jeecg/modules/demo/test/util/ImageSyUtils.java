@@ -1,21 +1,19 @@
 package org.jeecg.modules.demo.test.util;
 
 import cn.hutool.core.io.resource.ClassPathResource;
-import net.coobird.thumbnailator.Thumbnailator;
+import lombok.extern.slf4j.Slf4j;
 import net.coobird.thumbnailator.Thumbnails;
 import net.coobird.thumbnailator.geometry.Positions;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 
 /**
  * @author xuzhiyong
  * @createDate 2020-04-12-20:06
  */
+@Slf4j
 public class ImageSyUtils {
 
     // 不透明度
@@ -24,13 +22,13 @@ public class ImageSyUtils {
     public static byte[] imgAddSy(byte[] imgByte) {
         ByteArrayInputStream in = null;
         ByteArrayOutputStream bout = null;
+        InputStream resourceAsStream  = null;
         try {
             bout = new ByteArrayOutputStream();
             in = new ByteArrayInputStream(imgByte);
             BufferedImage image = ImageIO.read(in);
-            String path = ImageSyUtils.class.getClassLoader().getResource("sy.png").getPath();
-            File syFile = new File(path);
-            BufferedImage syBufferImage = ImageIO.read(syFile);
+            resourceAsStream = ImageSyUtils.class.getClassLoader().getResourceAsStream("sy.png");
+            BufferedImage syBufferImage = ImageIO.read(resourceAsStream);
             Thumbnails.of(image).size(image.getWidth(), image.getHeight())
                     .watermark(Positions.BOTTOM_RIGHT, syBufferImage , opacity).outputFormat("png").toOutputStream(bout);
             byte[] bytes = bout.toByteArray();
@@ -48,6 +46,13 @@ public class ImageSyUtils {
             if (bout != null) {
                 try {
                     bout.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            if(resourceAsStream != null){
+                try {
+                    resourceAsStream.close();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

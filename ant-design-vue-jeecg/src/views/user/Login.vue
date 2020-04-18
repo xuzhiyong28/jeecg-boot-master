@@ -204,8 +204,8 @@
           smsSendBtn: false,
         },
         validatorRules:{
-          username:{rules: [{ required: true, message: '请输入用户名!'},{validator: this.handleUsernameOrEmail}],initialValue:'xuht'},
-          password:{rules: [{ required: true, message: '请输入密码!',validator: 'click'}],initialValue:'xuhaiting@123'},
+          username:{rules: [{ required: true, message: '请输入用户名!'},{validator: this.handleUsernameOrEmail}],initialValue:'fjybh'},
+          password:{rules: [{ required: true, message: '请输入密码!',validator: 'click'}],initialValue:'Ybh*888888'},
           mobile:{rules: [{validator:this.validateMobile}]},
           captcha:{rule: [{ required: true, message: '请输入验证码!'}]},
           inputCode:{rules: [{ required: true, message: '请输入验证码!'}]}

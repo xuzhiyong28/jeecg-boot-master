@@ -29,7 +29,7 @@ public class ImageSyUtils {
             bout = new ByteArrayOutputStream();
             in = new ByteArrayInputStream(imgByte);
             BufferedImage image = ImageIO.read(in);
-            resourceAsStream = ImageSyUtils.class.getClassLoader().getResourceAsStream("sy.png");
+            resourceAsStream = ImageSyUtils.class.getClassLoader().getResourceAsStream("sy2.png");
             BufferedImage syBufferImage = ImageIO.read(resourceAsStream);
             Thumbnails.of(image)
                     //.size(image.getWidth(), image.getHeight())

@@ -76,6 +76,7 @@ public class SecurityToolsTest {
     @Test
     public void testFile(){
         System.out.println(ImageSyUtils.class.getClassLoader().getResource("sy.jpg").getPath());
+        System.out.println(ImageSyUtils.class.getProtectionDomain().getCodeSource().getLocation().getFile());
     }
 
 

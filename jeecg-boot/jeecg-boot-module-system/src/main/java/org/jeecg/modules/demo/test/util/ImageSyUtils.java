@@ -34,6 +34,7 @@ public class ImageSyUtils {
             Thumbnails.of(image)
                     //.size(image.getWidth(), image.getHeight())
                     .scale(0.5f)
+                    .outputQuality(0.5f)
                     //.watermark(Positions.BOTTOM_RIGHT, syBufferImage , opacity)
                     .watermark((var1, var2, var3, var4, var5, var6, var7, var8) -> {
                         int var9 = var1 - var3 - var6 - 150;

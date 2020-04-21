@@ -37,10 +37,8 @@ public class ImageSyUtils {
                     .outputQuality(0.7f)
                     //.watermark(Positions.BOTTOM_RIGHT, syBufferImage , opacity)
                     .watermark((var1, var2, var3, var4, var5, var6, var7, var8) -> {
-                        int var9 = var1 - var3 - var6 - 150;
-                        int var10 = var2 - var4 - var8 - 150;
-                        System.out.println(var9);
-                        System.out.println(var10);
+                        int var9 = var1 - var3 - var6 - 100;
+                        int var10 = var2 - var4 - var8 - 100;
                         return new Point(var9, var10);
                     },syBufferImage , opacity)
                     .outputFormat("jpg")

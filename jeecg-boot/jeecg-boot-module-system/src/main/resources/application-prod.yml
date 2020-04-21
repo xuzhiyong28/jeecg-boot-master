@@ -104,7 +104,8 @@ spring:
         hydee:
           url: jdbc:oracle:thin:@//192.168.1.125:1521/hydee
           username: h2
-          password: hydeesoft
+          #password: hydeesoft
+          password: hydeefjybh01
           driver-class-name: oracle.jdbc.driver.OracleDriver
   #redis 配置
   redis:

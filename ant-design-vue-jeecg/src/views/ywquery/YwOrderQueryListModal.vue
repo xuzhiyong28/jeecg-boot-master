@@ -71,7 +71,9 @@
           if(base64MapList[i].img){
             let tempMap = {
               "scanno" :　base64MapList[i].scanno,
-              "title" : "扫描件编号 :" + base64MapList[i].scanno,
+              //"title" : "扫描件编号 :" + base64MapList[i].scanno,
+              "title" :  base64MapList[i].FILE_FORMAT,
+              "fileName" : base64MapList[i].FILE_FORMAT,
               "img" : "data:image/png;base64," + base64MapList[i].img
             };
             this.imgMap.push(tempMap);
@@ -105,7 +107,8 @@
         let arr = [];
         for(let i = 0 ; i < this.imgMap.length ; i++){
           arr.push(this.imgMap[i]['img']);
-          imgNameList.push(this.imgMap[i]['scanno']);
+          //imgNameList.push(this.imgMap[i]['scanno']);
+          imgNameList.push(this.imgMap[i]['fileName']);
         }
         for (let i = 0; i < arr.length; i++) {
           let image = new Image();

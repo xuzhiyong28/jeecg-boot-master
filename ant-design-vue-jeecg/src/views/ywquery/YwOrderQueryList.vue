@@ -169,7 +169,7 @@
       showPhoto(record){
         let _this = this;
         this.$message.loading({ content: '数据查询中,请稍后......'});
-        getAction('/test/ywOrderQueryMain/imgList',{"wareid" : record.wareid}).then(res=>{
+        getAction('/test/ywOrderQueryMain/imgList',{"wareid" : record.wareid , "makeno" : record.makeno}).then(res=>{
           if(res.success){
             _this.$refs.showImgModel.edit(record,res.result);
             _this.$refs.showImgModel.title = "图片查看";

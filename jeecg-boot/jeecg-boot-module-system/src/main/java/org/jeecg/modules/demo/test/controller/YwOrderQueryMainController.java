@@ -73,13 +73,16 @@ public class YwOrderQueryMainController extends JeecgController<TWareCertificate
 
 
     @GetMapping(value = "/imgList")
-    public Result<?> getIWareModel(@RequestParam(name = "wareid") String wareid) {
+    public Result<?> getIWareModel(@RequestParam(name = "wareid") String wareid , @RequestParam(name = "makeno") String makeno) {
         QueryWrapper<TWareCertificateChk> tWareCertificateChkQueryWrapper = new QueryWrapper();
         //tWareCertificateChkQueryWrapper.eq("wareid", wareid);
         //List<TWareCertificateChk> tWareCertificateChks = itWareCertificateChkService.list(tWareCertificateChkQueryWrapper);
 
         QueryWrapper<TWareCertificateImage> tWareCertificateImageQueryWrapper = new QueryWrapper<>();
         tWareCertificateImageQueryWrapper.eq("WAREID",wareid);
+        if(StringUtils.isNotBlank(makeno)){
+            tWareCertificateImageQueryWrapper.eq("MAKENO" , makeno);
+        }
         List<TWareCertificateImage> tWareCertificateChks = tWareCertificateImageService.list(tWareCertificateImageQueryWrapper);
 
         if (CollectionUtils.isNotEmpty(tWareCertificateChks)) {

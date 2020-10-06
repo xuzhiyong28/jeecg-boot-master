@@ -70,5 +70,7 @@ public class TWareCertificateImage {
     private String INTENTNO;
     @TableField(value = "INVALIDATE_CHAR")
     private String INVALIDATE_CHAR;
+    @TableField(value = "IBMNAME")
+    private String IBMNAME;
 
 }

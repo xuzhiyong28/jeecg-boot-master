@@ -72,8 +72,8 @@
             let tempMap = {
               "scanno" :　base64MapList[i].scanno,
               //"title" : "扫描件编号 :" + base64MapList[i].scanno,
-              "title" :  base64MapList[i].FILE_FORMAT,
-              "fileName" : base64MapList[i].FILE_FORMAT,
+              "title" :  base64MapList[i].ibmname,
+              "fileName" : base64MapList[i].ibmname,
               "img" : "data:image/png;base64," + base64MapList[i].img
             };
             this.imgMap.push(tempMap);

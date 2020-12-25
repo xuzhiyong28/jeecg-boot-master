@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.jeecg.modules.demo.test.mapper.YwBuyMapper">
+<select id="getYwInventoryQuery" resultType="org.jeecg.modules.demo.test.entity.YwInventoryEntity">
+	SELECT
+	to_char (sysdate, 'YYYY-MM-DD') AS sysdate,
+	a.wareid AS wareid,
+	b.warename AS warename,
+	(
+	SELECT
+	factoryname
+	FROM
+	t_factory
+	WHERE
+	factoryid = c.factoryid
+	) AS factoryname,
+	b.warespec AS warespec,
+	b.wareunit AS wareunit,
+	c.makeno AS makeno,
+	c.invalidate AS invalidate,
+	a.wareqty AS wareqty,
+	1 AS kxstate
+	FROM
+	t_store_d a
+	LEFT JOIN t_store_i c ON a.wareid = c.wareid
+	AND a.batid = c.batid
+	AND a.compid = c.compid
+	LEFT JOIN t_Ware b ON a.wareid = b.wareid
+	AND a.compid = b.compid
+	WHERE
+	a.wareid IN (
+	SELECT
+	wareid
+	FROM
+	t_ware_class_base
+	WHERE
+	classgroupno = '54'
+	AND classcode = '5402'
+	AND compid = 1
+	)
+	AND a.compid = 1
+	AND c.invalidate IS NOT NULL
+	<![CDATA[ a.wareqty = <> 0 ]]>
+</select>
+
+
+</mapper>

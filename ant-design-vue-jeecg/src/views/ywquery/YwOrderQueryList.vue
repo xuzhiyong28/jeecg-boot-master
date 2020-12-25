@@ -89,26 +89,6 @@
             align:"center",
             dataIndex: 'batsaleno'
           },
-          /*{
-            title: '识别号',
-            align:"center",
-            dataIndex: 'rowno'
-          },
-          {
-            title: '商品编码',
-            align:"center",
-            dataIndex: 'warecode'
-          },
-          {
-            title: '商品唯一编码',
-            align:"center",
-            dataIndex: 'wareid'
-          },
-          {
-            title: '商品名称',
-            align:"center",
-            dataIndex: 'warename'
-          },*/
           {
             title: '商品名称',
             align:"center",

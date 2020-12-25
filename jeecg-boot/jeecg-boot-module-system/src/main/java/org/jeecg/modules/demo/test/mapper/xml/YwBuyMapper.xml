@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.jeecg.modules.demo.test.mapper.YwBuyMapper">
+<select id="getYwBuyQuery" resultType="org.jeecg.modules.demo.test.entity.YwBuyEntity">
+    SELECT
+	a.execdate AS execdate,
+	a.vencusno AS vencusno,
+	(
+		SELECT
+			vencusname
+		FROM
+			t_vencus
+		WHERE
+			compid = a.compid
+		AND vencusno = a.vencusno
+	) AS vencusname,
+	b.makeno AS makeno,
+	b.wareqty wareqty,
+	b.invalidate AS invalidate,
+	b.purprice AS purprice,
+	b.wareid AS wareid,
+	c.waregeneralname AS waregeneralname,
+	(
+		SELECT
+			factoryname
+		FROM
+			t_factory
+		WHERE
+			factoryid = c.factoryid
+	) AS factoryname,
+	c.warespec AS warespec,
+	c.wareunit AS wareunit
+	FROM
+		t_accept_h a
+	LEFT JOIN t_accept_d b ON a.acceptno = b.acceptno
+	LEFT JOIN t_Ware c ON b.wareid = c.wareid
+	AND a.compid = c.compid
+	WHERE
+	b.wareid IN (
+		SELECT
+			wareid
+		FROM
+			t_ware_class_base
+		WHERE
+			classgroupno = '54'
+		AND classcode = '5402'
+		AND compid = 1
+	)
+AND a. STATUS = 1
+AND a.compid = 1
+AND a.billcode = 'ACC'
+AND a.execdate >= sysdate - 80
+</select>
+
+
+</mapper>

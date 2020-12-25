@@ -1,2 +1,99 @@
 natapp的账号密码
 福建医佰汇 / yg82991120
+
+
+
+
+2.0
+============语句1 -- 购进=========
+select
+a.execdate as 采购日期,
+a.vencusno as 供应商ID,
+(select vencusname from t_vencus where compid=a.compid and vencusno=a.vencusno) as 供应商名称,
+b.makeno as 批号,
+b.wareqty  数量,
+b.invalidate as 有效期至,
+b.purprice as 单价,
+b.wareid as 货品ID,
+c.waregeneralname as 货品名称,
+(select factoryname from t_factory where factoryid=c.factoryid)   as 生产厂家,
+c.warespec as 规格,
+c.wareunit as 计量单位
+from t_accept_h  a
+left join t_accept_d b
+on a.acceptno=b.acceptno
+left join  t_Ware c on b.wareid=c.wareid and a.compid=c.compid
+where  b.wareid in (
+select wareid  from t_ware_class_base where  classgroupno='54' and classcode='5402' and compid=1)
+and  a.status=1 and a.compid=1
+and a.billcode = 'ACC'
+and a.execdate>=sysdate-80;
+
+
+==========语句2  -- 库存========================
+
+
+select
+to_char(sysdate,'YYYY-MM-DD') as 库存日期,
+a.wareid as 货品ID,
+b.warename as 货品名称,
+(select factoryname from t_factory where factoryid=c.factoryid)  as 生产厂家,
+b.warespec as 规格,
+b.wareunit as 计量单位,
+c.makeno as 批号,
+c.invalidate as 有效期至,
+a.wareqty as 数量,
+1 as 可销状态
+from t_store_d a left join t_store_i c on a.wareid=c.wareid and a.batid=c.batid and a.compid=c.compid
+left join t_Ware b on a.wareid=b.wareid and a.compid=b.compid
+where  a.wareid in (
+select wareid  from t_ware_class_base where  classgroupno='54' and classcode='5402' and compid=1) and a.compid=1 --韩美品种过滤条件
+and c.invalidate is not null and a.wareqty<>0
+
+
+=============语句3 零售 ======================
+
+select
+a.execdate  as 销售日期,
+a.vencusno as 客户ID,
+a.vencusname as 客户名称,
+b.address as 配送地址,
+c.makeno as 批号,
+c.wareqty as 数量,
+c.invalidate as 有效期至,
+c.whlprice as 单价,
+c.wareid as 货品ID,
+d.warename as 货品名称,
+d.warespec as 规格,
+d.wareunit as 计量单位,
+(select factoryname from t_factory where factoryid=d.factoryid) as 生产厂家
+from t_batsale_h a left join t_vencus b on a.vencusno=b.vencusno and a.compid=b.compid
+left join t_batsale_d c on a.batsaleno=c.batsaleno
+left join t_Ware d on a.c.wareid=d.wareid and a.compid=d.compid
+
+where  c.wareid in (
+select wareid  from t_ware_class_base where  classgroupno='54' and classcode='5402' and compid=1)
+and a.billcode='WHL' and a.status=1
+and  a.compid='1'
+union all
+select
+a.execdate  as 销售日期,
+a.vencusno as 客户ID,
+a.vencusname as 客户名称,
+b.address as 配送地址,
+c.makeno as 批号,
+c.wareqty as 数量,
+c.invalidate as 有效期至,
+c.whlprice as 单价,
+c.wareid as 货品ID,
+d.warename as 货品名称,
+d.warespec as 规格,
+d.wareunit as 计量单位,
+(select factoryname from t_factory where factoryid=d.factoryid) as 生产厂家
+from t_rebatsale_h a left join t_vencus b on a.vencusno=b.vencusno and a.compid=b.compid
+left join t_rebatsale_d c on a.batsaleno=c.batsaleno
+left join t_Ware d on a.c.wareid=d.wareid and a.compid=d.compid
+
+where  c.wareid in (
+select wareid  from t_ware_class_base where  classgroupno='54' and classcode='5402' and compid=1)
+and  a.compid='1';

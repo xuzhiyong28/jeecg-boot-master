@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.jeecg.modules.demo.test.mapper.YwRetailMapper">
 <select id="getYwRetailQuery" resultType="org.jeecg.modules.demo.test.entity.YwRetailEntity">
- SELECT
+	SELECT
 	a.execdate AS execdate,
 	a.vencusno AS vencusno,
 	a.vencusname AS vencusname,
@@ -15,75 +15,49 @@
 	d.warename AS warename,
 	d.warespec AS warespec,
 	d.wareunit AS wareunit,
-	(
-		SELECT
-			factoryname
-		FROM
-			t_factory
-		WHERE
-			factoryid = d.factoryid
-	) AS factoryname
-FROM
-	t_batsale_h a
-LEFT JOIN t_vencus b ON a.vencusno = b.vencusno
-AND a.compid = b.compid
-LEFT JOIN t_batsale_d c ON a.batsaleno = c.batsaleno
-LEFT JOIN t_Ware d ON a.c.wareid = d.wareid
-AND a.compid = d.compid
-WHERE
-	c.wareid IN (
-		SELECT
-			wareid
-		FROM
-			t_ware_class_base
-		WHERE
-			classgroupno = '54'
-		AND classcode = '5402'
-		AND compid = 1
-	)
-AND a.billcode = 'WHL'
-AND a. STATUS = 1
-AND a.compid = '1'
-UNION ALL
-	SELECT
-		a.execdate AS execdate,
-		a.vencusno AS vencusno,
-		a.vencusname AS vencusname,
-		b.address AS address,
-		c.makeno AS makeno,
-		c.wareqty AS wareqty,
-		c.invalidate AS invalidate,
-		c.whlprice AS whlprice,
-		c.wareid AS wareid,
-		d.warename AS warename,
-		d.warespec AS warespec,
-		d.wareunit AS wareunit,
-		(
-			SELECT
-				factoryname
-			FROM
-				t_factory
-			WHERE
-				factoryid = d.factoryid
-		) AS factoryname
+	( SELECT factoryname FROM t_factory WHERE factoryid = d.factoryid ) AS factoryname
 	FROM
-		t_rebatsale_h a
+	t_batsale_h a
+	LEFT JOIN t_vencus b ON a.vencusno = b.vencusno
+	AND a.compid = b.compid
+	LEFT JOIN t_batsale_d c ON a.batsaleno = c.batsaleno
+	LEFT JOIN t_Ware d ON a.c.wareid = d.wareid
+	AND a.compid = d.compid
+	WHERE
+	c.wareid IN ( SELECT wareid FROM t_ware_class_base WHERE classgroupno = '54' AND classcode = #{classcode} AND compid = 1 )
+	AND a.billcode = 'WHL'
+	AND a.STATUS = 1
+	AND a.compid = '1'
+	<![CDATA[
+		AND a.execdate >= TO_DATE (#{startdate}, 'YYYY-MM-DD')
+		AND A.EXECDATE < TO_DATE (#{enddate}, 'YYYY-MM-DD')
+	]]>
+
+	UNION ALL
+
+	SELECT
+	a.execdate AS execdate,
+	a.vencusno AS vencusno,
+	a.vencusname AS vencusname,
+	b.address AS address,
+	c.makeno AS makeno,
+	c.wareqty AS wareqty,
+	c.invalidate AS invalidate,
+	c.whlprice AS whlprice,
+	c.wareid AS wareid,
+	d.warename AS warename,
+	d.warespec AS warespec,
+	d.wareunit AS wareunit,
+	( SELECT factoryname FROM t_factory WHERE factoryid = d.factoryid ) AS factoryname
+	FROM
+	t_rebatsale_h a
 	LEFT JOIN t_vencus b ON a.vencusno = b.vencusno
 	AND a.compid = b.compid
 	LEFT JOIN t_rebatsale_d c ON a.batsaleno = c.batsaleno
 	LEFT JOIN t_Ware d ON a.c.wareid = d.wareid
 	AND a.compid = d.compid
 	WHERE
-		c.wareid IN (
-			SELECT
-				wareid
-			FROM
-				t_ware_class_base
-			WHERE
-				classgroupno = '54'
-			AND classcode = #{classcode}
-			AND compid = 1
-		)
+	c.wareid IN ( SELECT wareid FROM t_ware_class_base WHERE classgroupno = '54' AND classcode = #{classcode} AND compid = 1 )
 	AND a.compid = '1'
 	<![CDATA[
 		AND a.execdate >= TO_DATE (#{startdate}, 'YYYY-MM-DD')

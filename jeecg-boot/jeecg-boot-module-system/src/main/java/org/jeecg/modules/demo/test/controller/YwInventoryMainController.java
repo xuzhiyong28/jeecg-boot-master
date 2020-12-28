@@ -79,7 +79,7 @@ public class YwInventoryMainController extends JeecgController<YwInventoryEntity
         yw.setKxstate("2020-10-10");
         yw.setWarename("哈哈");
         ywInventoryEntityArrayList.add(yw);*/
-        List<YwInventoryEntity> ywInventoryEntityArrayList = getQueryList(sysUser.getWorkNo());
+        List<YwInventoryEntity> ywInventoryEntityArrayList = getQueryList(pageNo,pageSize,sysUser.getWorkNo());
         resultMap.put("records", ywInventoryEntityArrayList);
         resultMap.put("total", ywInventoryEntityArrayList.size());
         return Result.ok(resultMap);

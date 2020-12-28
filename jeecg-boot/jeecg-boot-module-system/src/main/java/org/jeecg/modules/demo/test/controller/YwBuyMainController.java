@@ -46,8 +46,8 @@ public class YwBuyMainController extends JeecgController<YwBuyEntity, YwBuyServi
         if (StringUtils.isBlank(enddate)) {
             enddate = DateUtils.formatDate(new Date());
         }
-        //List<YwBuyEntity> ywBuyQueryList = ywBuyService.getYwBuyQuery(classcode, startdate, enddate);
-        YwBuyEntity yw = new YwBuyEntity();
+        List<YwBuyEntity> ywBuyQueryList = ywBuyService.getYwBuyQuery(classcode, startdate, enddate);
+        /*YwBuyEntity yw = new YwBuyEntity();
         yw.setExecdate("2020-10-10");
         yw.setFactoryname("哈哈");
         yw.setInvalidate("2020-10-10");
@@ -58,10 +58,16 @@ public class YwBuyMainController extends JeecgController<YwBuyEntity, YwBuyServi
         yw.setWaregeneralname("嫩额");
         yw.setWareqty("ccc");
         List<YwBuyEntity> ywBuyQueryList = Lists.newArrayList();
-        ywBuyQueryList.add(yw);
-
-
-
+        ywBuyQueryList.add(yw);*/
+        if(ywBuyQueryList != null && ywBuyQueryList.size() > 0){
+            List<List<YwBuyEntity>> partition = com.google.common.collect.Lists.partition(ywBuyQueryList, pageSize);
+            int partionLength = partition.size();
+            if(pageNo <= partionLength){
+                return partition.get(pageNo - 1);
+            }else{
+                return Lists.newArrayList();
+            }
+        }
         return ywBuyQueryList;
     }
 

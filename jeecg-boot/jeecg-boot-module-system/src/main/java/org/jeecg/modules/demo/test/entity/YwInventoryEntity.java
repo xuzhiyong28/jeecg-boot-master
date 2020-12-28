@@ -11,7 +11,7 @@ import org.jeecgframework.poi.excel.annotation.Excel;
 @Setter
 public class YwInventoryEntity {
     @Excel(name = "库存日期", width = 15)
-    private String sysdate; //库存日期
+    private String kcdate; //库存日期
 
     @Excel(name = "货品", width = 15)
     private String wareid; //货品

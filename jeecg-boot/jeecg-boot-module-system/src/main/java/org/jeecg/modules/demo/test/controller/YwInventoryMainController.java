@@ -7,7 +7,6 @@ import org.apache.shiro.SecurityUtils;
 import org.jeecg.common.api.vo.Result;
 import org.jeecg.common.system.base.controller.JeecgController;
 import org.jeecg.common.system.vo.LoginUser;
-import org.jeecg.modules.demo.test.entity.YwBuyEntity;
 import org.jeecg.modules.demo.test.entity.YwInventoryEntity;
 import org.jeecg.modules.demo.test.mapper.YwBuyInventoryMapper;
 import org.jeecg.modules.demo.test.service.YwInventoryService;
@@ -36,6 +35,30 @@ public class YwInventoryMainController extends JeecgController<YwInventoryEntity
     @Resource
     private YwBuyInventoryMapper ywBuyInventoryMapper;
 
+
+    public List<YwInventoryEntity> getQueryList(Integer pageNo, Integer pageSize, String classcode) {
+        List<YwInventoryEntity> ywInventoryEntityArrayList = ywInventoryService.getYwInventoryQuery(classcode);
+        /*YwInventoryEntity yw = new YwInventoryEntity();
+        yw.setFactoryname("哈哈");
+        yw.setInvalidate("2020-10-10");
+        yw.setKxstate("2020-10-10");
+        yw.setWarename("哈哈");
+        List<YwInventoryEntity> ywInventoryEntityArrayList = Lists.newArrayList();
+        ywInventoryEntityArrayList.add(yw);*/
+        if(ywInventoryEntityArrayList != null && ywInventoryEntityArrayList.size() > 0){
+            List<List<YwInventoryEntity>> partition = com.google.common.collect.Lists.partition(ywInventoryEntityArrayList, pageSize);
+            int partionLength = partition.size();
+            if(pageNo <= partionLength){
+                return partition.get(pageNo - 1);
+            }else{
+                return Lists.newArrayList();
+            }
+        }
+        return ywInventoryEntityArrayList;
+    }
+
+
+
     /**
      * 分页列表查询
      *
@@ -50,13 +73,13 @@ public class YwInventoryMainController extends JeecgController<YwInventoryEntity
                                    HttpServletRequest req) {
         LoginUser sysUser = (LoginUser) SecurityUtils.getSubject().getPrincipal();
         Map<String, Object> resultMap = Maps.newHashMap();
-        YwInventoryEntity yw = new YwInventoryEntity();
+        /*YwInventoryEntity yw = new YwInventoryEntity();
         yw.setFactoryname("哈哈");
         yw.setInvalidate("2020-10-10");
         yw.setKxstate("2020-10-10");
         yw.setWarename("哈哈");
-        List<YwInventoryEntity> ywInventoryEntityArrayList = Lists.newArrayList();
-        ywInventoryEntityArrayList.add(yw);
+        ywInventoryEntityArrayList.add(yw);*/
+        List<YwInventoryEntity> ywInventoryEntityArrayList = getQueryList(sysUser.getWorkNo());
         resultMap.put("records", ywInventoryEntityArrayList);
         resultMap.put("total", ywInventoryEntityArrayList.size());
         return Result.ok(resultMap);
@@ -66,13 +89,7 @@ public class YwInventoryMainController extends JeecgController<YwInventoryEntity
     @GetMapping(value = "/exportXls")
     public ModelAndView exportXls(HttpServletRequest request) {
         LoginUser sysUser = (LoginUser) SecurityUtils.getSubject().getPrincipal();
-        YwInventoryEntity yw = new YwInventoryEntity();
-        yw.setFactoryname("哈哈");
-        yw.setInvalidate("2020-10-10");
-        yw.setKxstate("2020-10-10");
-        yw.setWarename("哈哈");
-        List<YwInventoryEntity> ywInventoryEntityArrayList = Lists.newArrayList();
-        ywInventoryEntityArrayList.add(yw);
+        List<YwInventoryEntity> ywInventoryEntityArrayList = getQueryList(1,100000,sysUser.getWorkNo());
         ModelAndView mv = new ModelAndView(new JeecgEntityExcelView());
         String title = "库存";
         mv.addObject(NormalExcelConstants.FILE_NAME, title); //此处设置的filename无效 ,前端会重更新设置一下

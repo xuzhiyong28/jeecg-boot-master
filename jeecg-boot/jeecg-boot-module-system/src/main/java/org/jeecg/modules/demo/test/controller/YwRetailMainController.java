@@ -37,6 +37,37 @@ public class YwRetailMainController extends JeecgController<YwRetailEntity, YwRe
     @Resource
     private YwRetailMapper ywRetailMapper;
 
+
+    public List<YwRetailEntity> getQueryList(Integer pageNo, Integer pageSize, String startdate, String enddate, String classcode) {
+        if (StringUtils.isBlank(startdate)) {
+            startdate = DateUtils.formatDate(new Date());
+        }
+        if (StringUtils.isBlank(enddate)) {
+            enddate = DateUtils.formatDate(new Date());
+        }
+
+        /*YwRetailEntity yw = new YwRetailEntity();
+        yw.setAddress("福建省福州市");
+        yw.setExecdate("2020-10-10");
+        yw.setFactoryname("工厂");
+        yw.setMakeno("1");
+        List<YwRetailEntity> ywRetailEntityList = Lists.newArrayList();
+        ywRetailEntityList.add(yw);*/
+
+        List<YwRetailEntity> ywRetailEntityList = ywRetailService.getYwRetailQuery(classcode, startdate, enddate);
+        if (ywRetailEntityList != null && ywRetailEntityList.size() > 0) {
+            List<List<YwRetailEntity>> partition = com.google.common.collect.Lists.partition(ywRetailEntityList, pageSize);
+            int partionLength = partition.size();
+            if (pageNo <= partionLength) {
+                return partition.get(pageNo - 1);
+            } else {
+                return Lists.newArrayList();
+            }
+        }
+        return ywRetailEntityList;
+    }
+
+
     /**
      * 分页列表查询
      *
@@ -48,24 +79,18 @@ public class YwRetailMainController extends JeecgController<YwRetailEntity, YwRe
     @GetMapping(value = "/list")
     public Result<?> queryPageList(@RequestParam(name = "pageNo", defaultValue = "1") Integer pageNo,
                                    @RequestParam(name = "pageSize", defaultValue = "10") Integer pageSize,
-                                   @RequestParam(name = "startdate",required = false) String startdate,
-                                   @RequestParam(name = "enddate",required = false) String enddate,
+                                   @RequestParam(name = "startdate", required = false) String startdate,
+                                   @RequestParam(name = "enddate", required = false) String enddate,
                                    HttpServletRequest req) {
-        if(StringUtils.isBlank(startdate)){
+        if (StringUtils.isBlank(startdate)) {
             startdate = DateUtils.formatDate(new Date());
         }
-        if(StringUtils.isBlank(enddate)){
+        if (StringUtils.isBlank(enddate)) {
             enddate = DateUtils.formatDate(new Date());
         }
         LoginUser sysUser = (LoginUser) SecurityUtils.getSubject().getPrincipal();
         Map<String, Object> resultMap = Maps.newHashMap();
-        YwRetailEntity yw = new YwRetailEntity();
-        yw.setAddress("福建省福州市");
-        yw.setExecdate("2020-10-10");
-        yw.setFactoryname("工厂");
-        yw.setMakeno("1");
-        List<YwRetailEntity> ywRetailEntityList = Lists.newArrayList();
-        ywRetailEntityList.add(yw);
+        List<YwRetailEntity> ywRetailEntityList = getQueryList(pageNo, pageSize, startdate, enddate, sysUser.getWorkNo());
         resultMap.put("records", ywRetailEntityList);
         resultMap.put("total", ywRetailEntityList.size());
         return Result.ok(resultMap);
@@ -75,23 +100,15 @@ public class YwRetailMainController extends JeecgController<YwRetailEntity, YwRe
     public ModelAndView exportXls(HttpServletRequest request,
                                   @RequestParam(name = "startdate", required = false) String startdate,
                                   @RequestParam(name = "enddate", required = false) String enddate) {
-        if(StringUtils.isBlank(startdate)){
+        if (StringUtils.isBlank(startdate)) {
             startdate = DateUtils.formatDate(new Date());
         }
-        if(StringUtils.isBlank(enddate)){
+        if (StringUtils.isBlank(enddate)) {
             enddate = DateUtils.formatDate(new Date());
         }
 
         LoginUser sysUser = (LoginUser) SecurityUtils.getSubject().getPrincipal();
-        Map<String, Object> resultMap = Maps.newHashMap();
-        YwRetailEntity yw = new YwRetailEntity();
-        yw.setAddress("福建省福州市");
-        yw.setExecdate("2020-10-10");
-        yw.setFactoryname("工厂");
-        yw.setMakeno("1");
-        List<YwRetailEntity> ywRetailEntityList = Lists.newArrayList();
-        ywRetailEntityList.add(yw);
-
+        List<YwRetailEntity> ywRetailEntityList = getQueryList(1, 100000, startdate, enddate, sysUser.getWorkNo());
         ModelAndView mv = new ModelAndView(new JeecgEntityExcelView());
         String title = "零售(" + startdate + " ~ " + enddate + ")";
         mv.addObject(NormalExcelConstants.FILE_NAME, title); //此处设置的filename无效 ,前端会重更新设置一下

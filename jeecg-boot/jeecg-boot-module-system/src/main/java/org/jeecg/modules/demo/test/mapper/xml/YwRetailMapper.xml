@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="org.jeecg.modules.demo.test.mapper.YwBuyMapper">
+<mapper namespace="org.jeecg.modules.demo.test.mapper.YwRetailMapper">
 <select id="getYwRetailQuery" resultType="org.jeecg.modules.demo.test.entity.YwRetailEntity">
  SELECT
 	a.execdate AS execdate,
@@ -87,7 +87,7 @@ UNION ALL
 	AND a.compid = '1'
 	<![CDATA[
 		AND a.execdate >= TO_DATE (#{startdate}, 'YYYY-MM-DD')
-	AND A.EXECDATE < TO_DATE (#{enddate}, 'YYYY-MM-DD')
+		AND A.EXECDATE < TO_DATE (#{enddate}, 'YYYY-MM-DD')
 	]]>
 
 </select>

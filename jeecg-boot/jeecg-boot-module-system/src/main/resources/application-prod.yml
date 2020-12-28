@@ -102,10 +102,11 @@ spring:
           driver-class-name: com.mysql.jdbc.Driver
           # 多数据源配置
         hydee:
-          url: jdbc:oracle:thin:@//192.168.1.125:1521/hydee
-          username: h2
+          url: jdbc:oracle:thin:@//192.168.1.125:1521/HYDEEPRO
+          #username: h2hydeefjybh01
           #password: hydeesoft
-          password: hydeefjybh01
+          username: h2
+          password: H2erp2020
           driver-class-name: oracle.jdbc.driver.OracleDriver
   #redis 配置
   redis:

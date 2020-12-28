@@ -2,14 +2,9 @@ package org.jeecg;
 
 import org.jeecg.common.util.SpringContextUtils;
 import org.jeecg.modules.demo.mock.MockController;
-import org.jeecg.modules.demo.test.entity.JeecgDemo;
-import org.jeecg.modules.demo.test.entity.TWareCertificateImage;
-import org.jeecg.modules.demo.test.entity.YwQueryEntity;
+import org.jeecg.modules.demo.test.entity.*;
 import org.jeecg.modules.demo.test.mapper.JeecgDemoMapper;
-import org.jeecg.modules.demo.test.service.IJeecgDemoService;
-import org.jeecg.modules.demo.test.service.ITWareCertificateChkService;
-import org.jeecg.modules.demo.test.service.TWareCertificateImageService;
-import org.jeecg.modules.demo.test.service.YwBuyService;
+import org.jeecg.modules.demo.test.service.*;
 import org.jeecg.modules.system.service.ISysDataLogService;
 import org.junit.Assert;
 import org.junit.Test;
@@ -101,10 +96,25 @@ public class SampleTest {
 	@Test
 	public void newXq(){
 		YwBuyService ywBuyService = SpringContextUtils.getBean(YwBuyService.class);
-		ywBuyService.getYwBuyQuery("","","");
-
+		List<YwBuyEntity> ywBuyQuery = ywBuyService.getYwBuyQuery("5401", "2020-10-01", "2020-12-25");
+		System.out.println(ywBuyQuery);
 	}
 
+
+	@Test
+	public void newXq2(){
+		YwInventoryService ywInventoryService = SpringContextUtils.getBean(YwInventoryService.class);
+		List<YwInventoryEntity> ywInventoryQuery = ywInventoryService.getYwInventoryQuery("5401");
+		System.out.println(ywInventoryQuery);
+	}
+
+	@Test
+	public void newXq3(){
+		YwRetailService ywRetailService = SpringContextUtils.getBean(YwRetailService.class);
+		List<YwRetailEntity> ywRetailQuery = ywRetailService.getYwRetailQuery("5401", "2020-10-01", "2020-12-25");
+		System.out.println(ywRetailQuery);
+
+	}
 
 
 }

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="org.jeecg.modules.demo.test.mapper.YwBuyMapper">
+<mapper namespace="org.jeecg.modules.demo.test.mapper.YwBuyInventoryMapper">
 <select id="getYwInventoryQuery" resultType="org.jeecg.modules.demo.test.entity.YwInventoryEntity">
 	SELECT
-	to_char (sysdate, 'YYYY-MM-DD') AS sysdate,
+	to_char (sysdate, 'YYYY-MM-DD') AS kcdate,
 	a.wareid AS wareid,
 	b.warename AS warename,
 	(
@@ -40,7 +40,7 @@
 	)
 	AND a.compid = 1
 	AND c.invalidate IS NOT NULL
-	<![CDATA[ a.wareqty = <> 0 ]]>
+	AND <![CDATA[ a.wareqty <> 0 ]]>
 </select>
 
 

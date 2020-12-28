@@ -226,6 +226,9 @@ export const JeecgListMixin = {
         fileName = "导出文件"
       }
       let param = {...this.queryParam};
+      if(param.createTimeRange){
+        delete param.createTimeRange;
+      }
       if(this.selectedRowKeys && this.selectedRowKeys.length>0){
         param['selections'] = this.selectedRowKeys.join(",")
       }

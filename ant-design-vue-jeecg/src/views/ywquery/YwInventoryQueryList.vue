@@ -77,7 +77,7 @@
           {
             title: '库存日期',
             align:"center",
-            dataIndex: 'sysdate'
+            dataIndex: 'kcdate'
           },
           {
             title: '货品ID',
@@ -116,7 +116,7 @@
             dataIndex: 'invalidate'
           },
           {
-            title: '日期',
+            title: '数量',
             align:"center",
             dataIndex: 'wareqty'
           },

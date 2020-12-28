@@ -97,3 +97,8 @@ left join t_Ware d on a.c.wareid=d.wareid and a.compid=d.compid
 where  c.wareid in (
 select wareid  from t_ware_class_base where  classgroupno='54' and classcode='5402' and compid=1)
 and  a.compid='1';
+
+==========vpn=========
+https://59.56.229.122:4433
+账号：许1
+密码：xuhaiting123456

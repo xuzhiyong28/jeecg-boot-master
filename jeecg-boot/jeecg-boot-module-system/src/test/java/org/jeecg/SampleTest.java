@@ -9,6 +9,7 @@ import org.jeecg.modules.demo.test.mapper.JeecgDemoMapper;
 import org.jeecg.modules.demo.test.service.IJeecgDemoService;
 import org.jeecg.modules.demo.test.service.ITWareCertificateChkService;
 import org.jeecg.modules.demo.test.service.TWareCertificateImageService;
+import org.jeecg.modules.demo.test.service.YwBuyService;
 import org.jeecg.modules.system.service.ISysDataLogService;
 import org.junit.Assert;
 import org.junit.Test;
@@ -95,8 +96,15 @@ public class SampleTest {
 	public void img(){
 		List<TWareCertificateImage> list = tWareCertificateImageService.list();
 		System.out.println(list);
+	}
+
+	@Test
+	public void newXq(){
+		YwBuyService ywBuyService = SpringContextUtils.getBean(YwBuyService.class);
+		ywBuyService.getYwBuyQuery("","","");
 
 	}
+
 
 
 }

@@ -59,6 +59,9 @@ public class YwBuyMainController extends JeecgController<YwBuyEntity, YwBuyServi
         yw.setWareqty("ccc");
         List<YwBuyEntity> ywBuyQueryList = Lists.newArrayList();
         ywBuyQueryList.add(yw);
+
+
+
         return ywBuyQueryList;
     }
 

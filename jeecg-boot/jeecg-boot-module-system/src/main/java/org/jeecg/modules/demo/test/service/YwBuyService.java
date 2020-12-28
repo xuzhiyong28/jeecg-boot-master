@@ -9,5 +9,5 @@ import java.util.List;
  * 购进Service
  */
 public interface YwBuyService extends IService<YwBuyEntity> {
-    public List<YwBuyEntity> getYwOrderQuery(String batsaleno);
+    public List<YwBuyEntity> getYwBuyQuery(String classcode, String startdate , String enddate);
 }

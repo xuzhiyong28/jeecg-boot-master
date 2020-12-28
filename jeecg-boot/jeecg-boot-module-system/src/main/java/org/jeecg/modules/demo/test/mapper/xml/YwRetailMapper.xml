@@ -81,9 +81,14 @@ UNION ALL
 				t_ware_class_base
 			WHERE
 				classgroupno = '54'
-			AND classcode = '5402'
+			AND classcode = #{classcode}
 			AND compid = 1
 		)
 	AND a.compid = '1'
+	<![CDATA[
+		AND a.execdate >= TO_DATE (#{startdate}, 'YYYY-MM-DD')
+	AND A.EXECDATE < TO_DATE (#{enddate}, 'YYYY-MM-DD')
+	]]>
+
 </select>
 </mapper>

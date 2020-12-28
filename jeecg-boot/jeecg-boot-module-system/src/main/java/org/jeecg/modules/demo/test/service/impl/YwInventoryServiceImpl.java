@@ -24,7 +24,7 @@ public class YwInventoryServiceImpl extends ServiceImpl<YwBuyInventoryMapper, Yw
     private YwBuyInventoryMapper ywBuyInventoryMapper;
 
     @Override
-    public List<YwInventoryEntity> getYwInventoryQuery(String batsaleno) {
-        return ywBuyInventoryMapper.getYwOrderQuery(batsaleno);
+    public List<YwInventoryEntity> getYwInventoryQuery(String classcode) {
+        return ywBuyInventoryMapper.getYwInventoryQuery(classcode);
     }
 }

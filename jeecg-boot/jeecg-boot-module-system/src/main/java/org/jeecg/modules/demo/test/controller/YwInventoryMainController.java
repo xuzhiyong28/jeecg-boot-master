@@ -3,8 +3,10 @@ package org.jeecg.modules.demo.test.controller;
 import com.google.api.client.util.Lists;
 import com.google.common.collect.Maps;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.shiro.SecurityUtils;
 import org.jeecg.common.api.vo.Result;
 import org.jeecg.common.system.base.controller.JeecgController;
+import org.jeecg.common.system.vo.LoginUser;
 import org.jeecg.modules.demo.test.entity.YwBuyEntity;
 import org.jeecg.modules.demo.test.entity.YwInventoryEntity;
 import org.jeecg.modules.demo.test.mapper.YwBuyInventoryMapper;
@@ -41,11 +43,20 @@ public class YwInventoryMainController extends JeecgController<YwInventoryEntity
      * @return
      */
     @GetMapping(value = "/list")
-    public Result<?> queryPageList(YwInventoryEntity ywInventoryEntity, @RequestParam(name = "pageNo", defaultValue = "1") Integer pageNo, @RequestParam(name = "pageSize", defaultValue = "10") Integer pageSize, HttpServletRequest req) {
+    public Result<?> queryPageList(@RequestParam(name = "pageNo", defaultValue = "1") Integer pageNo,
+                                   @RequestParam(name = "pageSize", defaultValue = "10") Integer pageSize,
+                                   HttpServletRequest req) {
+        LoginUser sysUser = (LoginUser) SecurityUtils.getSubject().getPrincipal();
         Map<String, Object> resultMap = Maps.newHashMap();
-        List<YwBuyEntity> ywBuyEntityList = Lists.newArrayList();
-        resultMap.put("records", ywBuyEntityList);
-        resultMap.put("total", ywBuyEntityList.size());
+        YwInventoryEntity yw = new YwInventoryEntity();
+        yw.setFactoryname("哈哈");
+        yw.setInvalidate("2020-10-10");
+        yw.setKxstate("2020-10-10");
+        yw.setWarename("哈哈");
+        List<YwInventoryEntity> ywInventoryEntityArrayList = Lists.newArrayList();
+        ywInventoryEntityArrayList.add(yw);
+        resultMap.put("records", ywInventoryEntityArrayList);
+        resultMap.put("total", ywInventoryEntityArrayList.size());
         return Result.ok(resultMap);
     }
 }

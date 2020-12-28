@@ -100,4 +100,9 @@ public class LoginUser {
 	 */
 	private String departIds;
 
+	/***
+	 * 工号
+	 */
+	private String workNo;
+
 }

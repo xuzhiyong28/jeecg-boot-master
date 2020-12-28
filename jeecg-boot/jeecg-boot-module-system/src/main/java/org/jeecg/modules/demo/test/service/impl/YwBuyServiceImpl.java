@@ -20,8 +20,9 @@ public class YwBuyServiceImpl extends ServiceImpl<YwBuyMapper, YwBuyEntity> impl
     @Autowired
     private YwBuyMapper ywBuyMapper;
 
+
     @Override
-    public List<YwBuyEntity> getYwOrderQuery(String batsaleno) {
-        return ywBuyMapper.getYwOrderQuery(batsaleno);
+    public List<YwBuyEntity> getYwBuyQuery(String classcode, String startdate, String enddate) {
+        return ywBuyMapper.getYwBuyQuery(classcode,startdate,enddate);
     }
 }

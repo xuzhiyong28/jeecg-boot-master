@@ -10,5 +10,5 @@ import java.util.List;
  * 库存Service
  */
 public interface YwInventoryService extends IService<YwInventoryEntity> {
-    public List<YwInventoryEntity> getYwInventoryQuery(String batsaleno);
+    public List<YwInventoryEntity> getYwInventoryQuery(String classcode);
 }

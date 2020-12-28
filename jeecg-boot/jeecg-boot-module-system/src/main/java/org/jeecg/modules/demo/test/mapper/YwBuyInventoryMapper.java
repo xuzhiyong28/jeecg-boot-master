@@ -13,5 +13,5 @@ import java.util.List;
  */
 public interface YwBuyInventoryMapper extends BaseMapper<YwInventoryEntity> {
 
-    public List<YwInventoryEntity> getYwOrderQuery(@Param("batsaleno") String batsaleno);
+    public List<YwInventoryEntity> getYwInventoryQuery(@Param("classcode") String classcode);
 }

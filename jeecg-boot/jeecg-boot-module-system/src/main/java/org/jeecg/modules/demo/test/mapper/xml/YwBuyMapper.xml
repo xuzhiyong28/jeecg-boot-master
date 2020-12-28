@@ -43,13 +43,16 @@
 			t_ware_class_base
 		WHERE
 			classgroupno = '54'
-		AND classcode = '5402'
+		AND classcode = #{classcode}
 		AND compid = 1
 	)
 AND a. STATUS = 1
 AND a.compid = 1
 AND a.billcode = 'ACC'
-AND a.execdate >= sysdate - 80
+<![CDATA[
+	AND a.execdate >= to_date(#{startdate},'YYYY-MM-DD')
+    AND a.execdate <= to_date(#{enddate} , 'YYYY-MM-DD')
+ ]]>
 </select>
 
 

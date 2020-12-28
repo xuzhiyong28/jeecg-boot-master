@@ -22,8 +22,9 @@ import java.util.List;
 public class YwRetailServiceImpl extends ServiceImpl<YwRetailMapper, YwRetailEntity> implements YwRetailService {
     @Autowired
     private YwRetailMapper ywRetailMapper;
+
     @Override
-    public List<YwRetailEntity> getYwRetailQuery(String batsaleno) {
-        return ywRetailMapper.getYwRetailQuery(batsaleno);
+    public List<YwRetailEntity> getYwRetailQuery(String classcode, String startdate, String enddate) {
+        return ywRetailMapper.getYwRetailQuery(classcode,startdate,enddate);
     }
 }

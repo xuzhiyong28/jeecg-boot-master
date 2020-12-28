@@ -13,5 +13,5 @@ import java.util.List;
  */
 public interface YwRetailMapper extends BaseMapper<YwRetailEntity> {
 
-    public List<YwRetailEntity> getYwRetailQuery(@Param("batsaleno") String batsaleno);
+    public List<YwRetailEntity> getYwRetailQuery(@Param("classcode") String classcode,@Param("startdate") String startdate, @Param("enddate") String enddate);
 }

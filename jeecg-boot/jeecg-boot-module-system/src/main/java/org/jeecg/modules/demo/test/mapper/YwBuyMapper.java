@@ -12,5 +12,5 @@ import java.util.List;
  */
 public interface YwBuyMapper extends BaseMapper<YwBuyEntity> {
 
-    public List<YwBuyEntity> getYwOrderQuery(@Param("batsaleno") String batsaleno);
+    public List<YwBuyEntity> getYwBuyQuery(@Param("classcode") String classcode,@Param("startdate") String startdate, @Param("enddate") String enddate);
 }

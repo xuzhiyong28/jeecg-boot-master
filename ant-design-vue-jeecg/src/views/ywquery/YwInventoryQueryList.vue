@@ -20,6 +20,7 @@
           <a-col :md="6" :sm="24" >
             <span style="float: left;overflow: hidden;" class="table-page-search-submitButtons">
               <a-button type="primary" @click="searchQuery" icon="search">查询</a-button>
+               <a-button type="primary" icon="download" @click="handleExportXls('库存详情报表')">导出</a-button>
               <a-button type="primary" @click="searchReset" icon="reload" style="margin-left: 8px">重置</a-button>
             </span>
           </a-col>
@@ -130,7 +131,7 @@
           list: "/test/ywInventory/list",
           delete: "/test/jeecgOrderMain/delete",
           deleteBatch: "/test/jeecgOrderMain/deleteBatch",
-          exportXlsUrl: "/test/jeecgOrderMain/exportXls",
+          exportXlsUrl: "/test/ywInventory/exportXls",
         },
         ipagination:{
           current: 1,

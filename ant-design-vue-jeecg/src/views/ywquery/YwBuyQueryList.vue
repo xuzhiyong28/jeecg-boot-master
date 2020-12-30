@@ -74,47 +74,27 @@
               return parseInt(index)+1;
             }
           },
-          {
+          /*{
             title: '供应商ID',
             align:"center",
             dataIndex: 'vencusno'
-          },
+          },*/
+          /*{
+            title: '货品ID',
+            align:"center",
+            dataIndex: 'wareid'
+          },*/
           {
             title: '采购日期',
             align:"center",
             dataIndex: 'execdate'
           },
-
           {
             title: '供应商名称',
             align:"center",
             dataIndex: 'vencusname'
           },
-          {
-            title: '批号',
-            align:"center",
-            dataIndex: 'makeno'
-          },
-          {
-            title: '数量',
-            align:"center",
-            dataIndex: 'wareqty'
-          },
-          {
-            title: '有效期至',
-            align:"center",
-            dataIndex: 'invalidate'
-          },
-          {
-            title: '单价',
-            align:"center",
-            dataIndex: 'purprice'
-          },
-          {
-            title: '货品ID',
-            align:"center",
-            dataIndex: 'wareid'
-          },
+
           {
             title: '货品名称',
             align:"center",
@@ -134,7 +114,29 @@
             title: '计量单位',
             align:"center",
             dataIndex: 'wareunit'
+          },
+          {
+            title: '数量',
+            align:"center",
+            dataIndex: 'wareqty'
+          },
+          {
+            title: '单价',
+            align:"center",
+            dataIndex: 'purprice'
+          },
+          {
+            title: '批号',
+            align:"center",
+            dataIndex: 'makeno'
+          },
+          {
+            title: '有效期至',
+            align:"center",
+            dataIndex: 'invalidate'
           }
+
+
         ],
         url: {
           list: "/test/ywBuy/list",

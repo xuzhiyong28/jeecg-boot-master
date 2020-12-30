@@ -9,6 +9,7 @@ import org.jeecg.common.api.vo.Result;
 import org.jeecg.common.system.base.controller.JeecgController;
 import org.jeecg.common.system.vo.LoginUser;
 import org.jeecg.common.util.DateUtils;
+import org.jeecg.modules.demo.test.constant.YwConstant;
 import org.jeecg.modules.demo.test.entity.YwRetailEntity;
 import org.jeecg.modules.demo.test.mapper.YwRetailMapper;
 import org.jeecg.modules.demo.test.service.YwRetailService;
@@ -113,7 +114,7 @@ public class YwRetailMainController extends JeecgController<YwRetailEntity, YwRe
         String title = "零售(" + startdate + " ~ " + enddate + ")";
         mv.addObject(NormalExcelConstants.FILE_NAME, title); //此处设置的filename无效 ,前端会重更新设置一下
         mv.addObject(NormalExcelConstants.CLASS, YwRetailEntity.class);
-        mv.addObject(NormalExcelConstants.PARAMS, new ExportParams(title + "报表", "导出人:" + sysUser.getRealname(), title));
+        mv.addObject(NormalExcelConstants.PARAMS, new ExportParams(title + "报表", "导出人:" + YwConstant.secondTitle, title));
         mv.addObject(NormalExcelConstants.DATA_LIST, ywRetailEntityList);
         return mv;
 

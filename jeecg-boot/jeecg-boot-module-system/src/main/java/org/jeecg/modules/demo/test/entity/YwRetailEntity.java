@@ -19,7 +19,7 @@ public class YwRetailEntity {
     @Excel(name = "客户名称", width = 15)
     private String vencusname ;// 客户名称
 
-    @Excel(name = "配送地址", width = 15)
+    //@Excel(name = "配送地址", width = 15)
     private String address ;// 配送地址
 
     @Excel(name = "批号", width = 15)

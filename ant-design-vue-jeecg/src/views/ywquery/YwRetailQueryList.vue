@@ -90,11 +90,11 @@
             align:"center",
             dataIndex: 'vencusname'
           },
-          {
+          /*{
             title: '配送地址',
             align:"center",
             dataIndex: 'address'
-          },
+          },*/
           {
             title: '批号',
             align:"center",

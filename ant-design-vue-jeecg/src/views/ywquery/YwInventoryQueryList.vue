@@ -74,11 +74,11 @@
               return parseInt(index)+1;
             }
           },
-          {
+          /*{
             title: '库存日期',
             align:"center",
             dataIndex: 'kcdate'
-          },
+          },*/
           {
             title: '货品ID',
             align:"center",
@@ -119,12 +119,12 @@
             title: '数量',
             align:"center",
             dataIndex: 'wareqty'
-          },
-          {
+          }
+          /*{
             title: '可销状态',
             align:"center",
             dataIndex: 'kxstate'
-          }
+          }*/
 
         ],
         url: {

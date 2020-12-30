@@ -10,7 +10,7 @@ import org.jeecgframework.poi.excel.annotation.Excel;
 @Getter
 @Setter
 public class YwInventoryEntity {
-    @Excel(name = "库存日期", width = 15)
+    //@Excel(name = "库存日期", width = 15)
     private String kcdate; //库存日期
 
     @Excel(name = "货品", width = 15)
@@ -37,6 +37,6 @@ public class YwInventoryEntity {
     @Excel(name = "数量", width = 15)
     private String wareqty;//数量
 
-    @Excel(name = "可销状态", width = 15)
+    //@Excel(name = "可销状态", width = 15)
     private String kxstate; //可销状态
 }

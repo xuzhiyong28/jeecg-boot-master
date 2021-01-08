@@ -90,31 +90,6 @@
             align:"center",
             dataIndex: 'vencusname'
           },
-          /*{
-            title: '配送地址',
-            align:"center",
-            dataIndex: 'address'
-          },*/
-          {
-            title: '批号',
-            align:"center",
-            dataIndex: 'makeno'
-          },
-          {
-            title: '数量',
-            align:"center",
-            dataIndex: 'wareqty'
-          },
-          {
-            title: '有效期至',
-            align:"center",
-            dataIndex: 'invalidate'
-          },
-          {
-            title: '单价',
-            align:"center",
-            dataIndex: 'whlprice'
-          },
           {
             title: '货品ID',
             align:"center",
@@ -131,14 +106,40 @@
             dataIndex: 'warespec'
           },
           {
+            title: '生产厂家',
+            align:"center",
+            dataIndex: 'factoryname'
+          },
+          {
             title: '计量单位',
             align:"center",
             dataIndex: 'wareunit'
           },
           {
-            title: '生产厂家',
+            title: '数量',
             align:"center",
-            dataIndex: 'factoryname'
+            dataIndex: 'wareqty'
+          },
+          {
+            title: '单价',
+            align:"center",
+            dataIndex: 'whlprice'
+          },
+          /*{
+            title: '配送地址',
+            align:"center",
+            dataIndex: 'address'
+          },*/
+          {
+            title: '批号',
+            align:"center",
+            dataIndex: 'makeno'
+          },
+
+          {
+            title: '有效期至',
+            align:"center",
+            dataIndex: 'invalidate'
           }
         ],
         url: {

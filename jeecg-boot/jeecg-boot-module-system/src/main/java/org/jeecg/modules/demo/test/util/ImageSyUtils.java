@@ -22,6 +22,9 @@ public class ImageSyUtils {
     private static float opacity = 0.6f;
 
     public static byte[] imgAddSy(byte[] imgByte , Integer COMPID) {
+        if(COMPID == null){
+            COMPID = 1;
+        }
         ByteArrayInputStream in = null;
         ByteArrayOutputStream bout = null;
         InputStream resourceAsStream  = null;

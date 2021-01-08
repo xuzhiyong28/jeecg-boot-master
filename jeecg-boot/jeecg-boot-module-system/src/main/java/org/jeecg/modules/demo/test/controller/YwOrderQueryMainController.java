@@ -88,7 +88,7 @@ public class YwOrderQueryMainController extends JeecgController<TWareCertificate
         if (CollectionUtils.isNotEmpty(tWareCertificateChks)) {
             tWareCertificateChks.forEach(ware -> {
                 if(ware.getIMG() != null){
-                    ware.setIMG(ImageSyUtils.imgAddSy(ware.getIMG()));
+                    ware.setIMG(ImageSyUtils.imgAddSy(ware.getIMG() , ware.getCOMPID()));
                 }
             });
             return Result.ok(tWareCertificateChks);

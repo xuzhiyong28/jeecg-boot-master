@@ -21,7 +21,7 @@ public class ImageSyUtils {
     // 不透明度
     private static float opacity = 0.6f;
 
-    public static byte[] imgAddSy(byte[] imgByte) {
+    public static byte[] imgAddSy(byte[] imgByte , Integer COMPID) {
         ByteArrayInputStream in = null;
         ByteArrayOutputStream bout = null;
         InputStream resourceAsStream  = null;
@@ -29,7 +29,9 @@ public class ImageSyUtils {
             bout = new ByteArrayOutputStream();
             in = new ByteArrayInputStream(imgByte);
             BufferedImage image = ImageIO.read(in);
-            resourceAsStream = ImageSyUtils.class.getClassLoader().getResourceAsStream("sy2.png");
+            resourceAsStream = COMPID == 2 ?
+                    ImageSyUtils.class.getClassLoader().getResourceAsStream("sy3.png") :
+                    ImageSyUtils.class.getClassLoader().getResourceAsStream("sy2.png") ;
             BufferedImage syBufferImage = ImageIO.read(resourceAsStream);
             Thumbnails.of(image)
                     //.size(image.getWidth(), image.getHeight())

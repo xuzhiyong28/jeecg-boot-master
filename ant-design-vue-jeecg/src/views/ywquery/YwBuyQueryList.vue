@@ -126,6 +126,11 @@
             dataIndex: 'purprice'
           },
           {
+            title: '金额',
+            align:"center",
+            dataIndex: 'money'
+          },
+          {
             title: '批号',
             align:"center",
             dataIndex: 'makeno'

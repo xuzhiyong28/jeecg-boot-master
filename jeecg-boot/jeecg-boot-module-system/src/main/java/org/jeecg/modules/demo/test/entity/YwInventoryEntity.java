@@ -39,4 +39,11 @@ public class YwInventoryEntity {
 
     //@Excel(name = "可销状态", width = 15)
     private String kxstate; //可销状态
+
+    @Excel(name = "金额", width = 15,orderNum = "5")
+    private String money;
+
+    @Excel(name = "单价", width = 15,orderNum = "7")
+    private String purprice; //单价
+
 }

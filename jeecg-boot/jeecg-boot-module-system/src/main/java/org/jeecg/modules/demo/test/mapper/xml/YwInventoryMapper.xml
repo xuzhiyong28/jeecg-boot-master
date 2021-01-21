@@ -19,12 +19,17 @@
 	c.makeno AS makeno,
 	c.invalidate AS invalidate,
 	a.wareqty AS wareqty,
+	c.purprice as purprice,
+  	(a.wareqty * c.purprice) as money,
 	1 AS kxstate
 	FROM
 	t_store_d a
 	LEFT JOIN t_store_i c ON a.wareid = c.wareid
 	AND a.batid = c.batid
 	AND a.compid = c.compid
+	<![CDATA[
+		AND c.ownerid<>101
+	]]>
 	LEFT JOIN t_Ware b ON a.wareid = b.wareid
 	AND a.compid = b.compid
 	WHERE

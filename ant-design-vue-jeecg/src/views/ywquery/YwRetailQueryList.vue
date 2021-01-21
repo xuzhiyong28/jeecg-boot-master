@@ -84,7 +84,6 @@
             align:"center",
             dataIndex: 'vencusno'
           },
-
           {
             title: '客户名称',
             align:"center",
@@ -135,11 +134,15 @@
             align:"center",
             dataIndex: 'makeno'
           },
-
           {
             title: '有效期至',
             align:"center",
             dataIndex: 'invalidate'
+          },
+          {
+            title: '金额',
+            align:"center",
+            dataIndex: 'money'
           }
         ],
         url: {

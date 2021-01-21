@@ -42,4 +42,8 @@ public class YwBuyEntity {
 
     @Excel(name = "计量单位", width = 15,orderNum = "5")
     private String wareunit;//计量单位
+
+    @Excel(name = "金额", width = 15,orderNum = "5")
+    private String money;
+
 }

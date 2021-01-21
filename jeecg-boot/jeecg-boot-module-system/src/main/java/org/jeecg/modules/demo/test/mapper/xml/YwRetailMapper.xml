@@ -11,6 +11,7 @@
 	c.wareqty AS wareqty,
 	c.invalidate AS invalidate,
 	c.whlprice AS whlprice,
+	(c.wareqty*c.whlprice) AS money,
 	c.wareid AS wareid,
 	d.warename AS warename,
 	d.warespec AS warespec,
@@ -21,6 +22,9 @@
 	LEFT JOIN t_vencus b ON a.vencusno = b.vencusno
 	AND a.compid = b.compid
 	LEFT JOIN t_batsale_d c ON a.batsaleno = c.batsaleno
+	<![CDATA[
+	  AND a.ownerid<>101
+	]]>
 	LEFT JOIN t_Ware d ON a.c.wareid = d.wareid
 	AND a.compid = d.compid
 	WHERE
@@ -44,6 +48,7 @@
 	c.wareqty AS wareqty,
 	c.invalidate AS invalidate,
 	c.whlprice AS whlprice,
+	(c.wareqty * c.whlprice) AS money,
 	c.wareid AS wareid,
 	d.warename AS warename,
 	d.warespec AS warespec,
@@ -54,6 +59,9 @@
 	LEFT JOIN t_vencus b ON a.vencusno = b.vencusno
 	AND a.compid = b.compid
 	LEFT JOIN t_rebatsale_d c ON a.batsaleno = c.batsaleno
+	<![CDATA[
+		AND a.ownerid<>101
+	]]>
 	LEFT JOIN t_Ware d ON a.c.wareid = d.wareid
 	AND a.compid = d.compid
 	WHERE

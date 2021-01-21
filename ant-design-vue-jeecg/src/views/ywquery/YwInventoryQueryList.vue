@@ -119,6 +119,16 @@
             title: '数量',
             align:"center",
             dataIndex: 'wareqty'
+          },
+          {
+            title: '单价',
+            align:"center",
+            dataIndex: 'purprice'
+          },
+          {
+            title: '金额',
+            align:"center",
+            dataIndex: 'money'
           }
           /*{
             title: '可销状态',

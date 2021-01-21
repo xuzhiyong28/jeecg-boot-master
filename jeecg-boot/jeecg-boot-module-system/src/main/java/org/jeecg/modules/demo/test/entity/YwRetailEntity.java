@@ -48,4 +48,7 @@ public class YwRetailEntity {
 
     @Excel(name = "生产厂家", width = 15)
     private String factoryname; //生产厂家
+
+    @Excel(name = "金额", width = 15,orderNum = "5")
+    private String money;
 }

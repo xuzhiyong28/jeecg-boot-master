@@ -20,7 +20,7 @@
 	c.invalidate AS invalidate,
 	a.wareqty AS wareqty,
 	c.purprice as purprice,
-  	(a.wareqty * c.purprice) as money,
+  	TO_CHAR(a.wareqty * c.purprice) as money,
 	1 AS kxstate
 	FROM
 	t_store_d a

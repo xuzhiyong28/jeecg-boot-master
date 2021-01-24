@@ -17,7 +17,7 @@
 	b.makeno AS makeno,
 	b.wareqty wareqty,
 	b.invalidate AS invalidate,
-	(b.wareqty * b.purprice) AS money,
+	TO_CHAR((b.wareqty * b.purprice)) AS money,
 	b.purprice AS purprice,
 	b.wareid AS wareid,
 	c.waregeneralname AS waregeneralname,

@@ -17,7 +17,7 @@
 	b.makeno AS makeno,
 	b.wareqty wareqty,
 	b.invalidate AS invalidate,
-	TO_CHAR((b.wareqty * b.purprice)) AS money,
+	TO_CHAR(b.wareqty * b.purprice) AS money,
 	b.purprice AS purprice,
 	b.wareid AS wareid,
 	c.waregeneralname AS waregeneralname,
@@ -35,21 +35,19 @@
 		t_accept_h a
 	LEFT JOIN t_accept_d b ON a.acceptno = b.acceptno
 	<![CDATA[
-		AND a.ownerid<>101
+		
 	]]>
 	LEFT JOIN t_Ware c ON b.wareid = c.wareid
 	AND a.compid = c.compid
 	WHERE
-	b.wareid IN (
-		SELECT
-			wareid
-		FROM
-			t_ware_class_base
-		WHERE
-			classgroupno = '54'
-		AND classcode = #{classcode}
-		AND compid = 1
-	)
+	exists (SELECT wareid,classcode
+                      FROM t_ware_class_base d
+                     WHERE classgroupno = '54'
+                       AND classcode = #{classcode}
+                       AND compid = 1 and d.wareid = b.wareid )
+   and ( a.ownerid > 101 
+   or (a.ownerid = 101 and #{classcode} = 5416)
+   or (a.ownerid = 101 and #{classcode} = 5417) )
 AND a. STATUS = 1
 AND a.compid = 1
 AND a.billcode = 'ACC'

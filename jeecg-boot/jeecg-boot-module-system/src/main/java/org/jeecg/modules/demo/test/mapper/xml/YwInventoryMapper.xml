@@ -28,21 +28,20 @@
 	AND a.batid = c.batid
 	AND a.compid = c.compid
 	<![CDATA[
-		AND c.ownerid<>101
+		
 	]]>
 	LEFT JOIN t_Ware b ON a.wareid = b.wareid
 	AND a.compid = b.compid
 	WHERE
-	a.wareid IN (
-	SELECT
-	wareid
-	FROM
-	t_ware_class_base
-	WHERE
-	classgroupno = '54'
-	AND classcode = #{classcode}
-	AND compid = 1
-	)
+	exists (SELECT wareid,classcode
+                      FROM t_ware_class_base d
+                     WHERE classgroupno = '54'
+                       AND classcode = #{classcode}
+                       AND compid = 1 and d.wareid = a.wareid )
+   and ( c.ownerid > 101 
+   or (c.ownerid = 101 and #{classcode} = 5416)
+  or (c.ownerid = 101 and #{classcode} = 5147)
+    )
 	AND a.compid = 1
 	AND c.invalidate IS NOT NULL
 	AND <![CDATA[ a.wareqty <> 0 ]]>

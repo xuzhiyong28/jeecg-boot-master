@@ -23,12 +23,19 @@
 	AND a.compid = b.compid
 	LEFT JOIN t_batsale_d c ON a.batsaleno = c.batsaleno
 	<![CDATA[
-	  AND a.ownerid<>101
+	
 	]]>
 	LEFT JOIN t_Ware d ON a.c.wareid = d.wareid
 	AND a.compid = d.compid
 	WHERE
-	c.wareid IN ( SELECT wareid FROM t_ware_class_base WHERE classgroupno = '54' AND classcode = #{classcode} AND compid = 1 )
+	exists (SELECT wareid,classcode
+                      FROM t_ware_class_base d
+                     WHERE classgroupno = '54'
+                       AND classcode = #{classcode}
+                       AND compid = 1 and d.wareid = c.wareid )
+   and ( a.ownerid > 101 
+   or (a.ownerid = 101 and #{classcode} = 5416)
+   or (a.ownerid = 101 and #{classcode} = 5417) )
 	AND a.billcode = 'WHL'
 	AND a.STATUS = 1
 	AND a.compid = '1'
@@ -48,7 +55,7 @@
 	c.wareqty AS wareqty,
 	c.invalidate AS invalidate,
 	c.whlprice AS whlprice,
-	TO_CHAR(c.wareqty * c.whlprice) AS money,
+	(c.wareqty * c.whlprice) AS money,
 	c.wareid AS wareid,
 	d.warename AS warename,
 	d.warespec AS warespec,
@@ -60,12 +67,19 @@
 	AND a.compid = b.compid
 	LEFT JOIN t_rebatsale_d c ON a.batsaleno = c.batsaleno
 	<![CDATA[
-		AND a.ownerid<>101
+		
 	]]>
 	LEFT JOIN t_Ware d ON a.c.wareid = d.wareid
 	AND a.compid = d.compid
 	WHERE
-	c.wareid IN ( SELECT wareid FROM t_ware_class_base WHERE classgroupno = '54' AND classcode = #{classcode} AND compid = 1 )
+	exists (SELECT wareid,classcode
+                      FROM t_ware_class_base d
+                     WHERE classgroupno = '54'
+                       AND classcode = #{classcode}
+                       AND compid = 1 and d.wareid = c.wareid )
+   and ( a.ownerid > 101 
+   or (a.ownerid = 101 and #{classcode} = 5416)
+   or (a.ownerid = 101 and #{classcode} = 5417) )
 	AND a.compid = '1'
 	<![CDATA[
 		AND a.execdate >= TO_DATE (#{startdate}, 'YYYY-MM-DD')

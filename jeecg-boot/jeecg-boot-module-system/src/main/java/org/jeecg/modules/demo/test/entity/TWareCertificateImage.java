@@ -49,7 +49,7 @@ public class TWareCertificateImage {
     @TableField(value = "NOTES")
     private String NOTES;
     @TableField(value = "STAMP")
-    private Integer STAMP;
+    private String STAMP;
     @TableField(value = "CERTIFICATENO")
     private String CERTIFICATENO;
     @TableField(value = "OPERATE_FLAG")

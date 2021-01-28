@@ -23,7 +23,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 public class JeecgApplication {
 
   public static void main(String[] args) throws UnknownHostException {
-    //System.setProperty("spring.devtools.restart.enabled", "true");
+    System.setProperty("spring.devtools.restart.enabled", "true");
 
     ConfigurableApplicationContext application = SpringApplication.run(JeecgApplication.class, args);
     Environment env = application.getEnvironment();

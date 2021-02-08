@@ -32,10 +32,18 @@ public class ImageSyUtils {
             bout = new ByteArrayOutputStream();
             in = new ByteArrayInputStream(imgByte);
             BufferedImage image = ImageIO.read(in);
+            int imageWidth = image.getWidth();
+            int imageHeight = image.getHeight();
             resourceAsStream = COMPID == 2 ?
                     ImageSyUtils.class.getClassLoader().getResourceAsStream("sy3.png") :
                     ImageSyUtils.class.getClassLoader().getResourceAsStream("sy2.png") ;
             BufferedImage syBufferImage = ImageIO.read(resourceAsStream);
+            int syImageWidth = syBufferImage.getWidth();
+            int syImageHeight = syBufferImage.getHeight();
+            if(imageWidth < 1500 || imageHeight < 1500){
+                syBufferImage = Thumbnails.of(syBufferImage).size(180, 180)
+                        .keepAspectRatio(false).asBufferedImage();
+            }
             Thumbnails.of(image)
                     //.size(image.getWidth(), image.getHeight())
                     .scale(0.7f)

@@ -53,7 +53,7 @@ public class SecurityToolsTest {
 
     @Test
     public void testImg() throws IOException {
-        FileInputStream fis = new FileInputStream("D:\\1.jpg");
+        FileInputStream fis = new FileInputStream("D:\\1.png");
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         byte[] b = new byte[1024];
         int n;
@@ -64,7 +64,7 @@ public class SecurityToolsTest {
         fis.close();
         bos.close();
         byte[] buffer = bos.toByteArray();
-        byte[] newBuffer = ImageSyUtils.imgAddSy(buffer);
+        byte[] newBuffer = ImageSyUtils.imgAddSy(buffer,null);
         BufferedOutputStream bos2 = null;
         FileOutputStream fos = null;
         File file = new File("D:\\2.jpg");

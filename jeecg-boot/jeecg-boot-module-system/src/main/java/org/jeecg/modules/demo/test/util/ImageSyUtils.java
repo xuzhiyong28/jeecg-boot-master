@@ -44,6 +44,13 @@ public class ImageSyUtils {
                 syBufferImage = Thumbnails.of(syBufferImage).size(180, 180)
                         .keepAspectRatio(false).asBufferedImage();
             }
+
+            if(imageWidth < 800 || imageHeight < 800){
+                syBufferImage = Thumbnails.of(syBufferImage).size(90, 90)
+                        .keepAspectRatio(false).asBufferedImage();
+            }
+
+
             Thumbnails.of(image)
                     //.size(image.getWidth(), image.getHeight())
                     .scale(0.7f)

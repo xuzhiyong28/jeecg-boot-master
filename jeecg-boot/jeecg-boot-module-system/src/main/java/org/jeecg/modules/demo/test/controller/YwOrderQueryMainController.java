@@ -12,6 +12,7 @@ import org.apache.commons.lang.StringUtils;
 import org.checkerframework.checker.units.qual.A;
 import org.jeecg.common.api.vo.Result;
 import org.jeecg.common.system.base.controller.JeecgController;
+import org.jeecg.common.system.vo.DictModel;
 import org.jeecg.modules.demo.test.entity.TWareCertificateChk;
 import org.jeecg.modules.demo.test.entity.TWareCertificateImage;
 import org.jeecg.modules.demo.test.entity.YwQueryEntity;
@@ -19,6 +20,7 @@ import org.jeecg.modules.demo.test.mapper.TWareCertificateChkMapper;
 import org.jeecg.modules.demo.test.service.ITWareCertificateChkService;
 import org.jeecg.modules.demo.test.service.TWareCertificateImageService;
 import org.jeecg.modules.demo.test.util.ImageSyUtils;
+import org.jeecg.modules.system.service.ISysDictService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -47,6 +49,10 @@ public class YwOrderQueryMainController extends JeecgController<TWareCertificate
 
     @Resource
     private TWareCertificateChkMapper tWareCertificateChkMapper;
+
+
+    @Autowired
+    private ISysDictService sysDictService;
 
     /**
      * 分页列表查询
@@ -87,13 +93,31 @@ public class YwOrderQueryMainController extends JeecgController<TWareCertificate
 
         if (CollectionUtils.isNotEmpty(tWareCertificateChks)) {
             tWareCertificateChks.forEach(ware -> {
-                if(ware.getIMG() != null){
+                if(ware.getIMG() != null && isSyByCode()){
                     ware.setIMG(ImageSyUtils.imgAddSy(ware.getIMG() , ware.getCOMPID()));
                 }
             });
             return Result.ok(tWareCertificateChks);
         }
         return Result.error("找不到对象");
+    }
+
+
+    /***
+     * 根据字典判断是否需要加水印
+     * @return
+     */
+    public boolean isSyByCode(){
+        List<DictModel> imgsy = sysDictService.queryDictItemsByCode("imgsy");
+        if(CollectionUtils.isEmpty(imgsy)){
+            return true;
+        }
+        DictModel dictModel = imgsy.get(0);
+        if(StringUtils.equals(dictModel.getValue(),"1")) {
+            return true;
+        }else {
+            return false;
+        }
     }
 
 
